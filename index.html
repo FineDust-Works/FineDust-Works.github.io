@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FineDust Works</title>
+  <meta name="description" content="FineDust Works — 로봇, 작은 디바이스, 툴, AI 에이전트, 소프트웨어, 게임까지. 작은 입자들이 모여 형태가 되는 1인 스튜디오." />
+  <meta name="theme-color" content="#000000" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+
+  <meta property="og:title" content="FineDust Works" />
+  <meta property="og:description" content="작은 입자들이 모여 형태가 되는 1인 스튜디오." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 건너뛰기</a>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#top" aria-label="FineDust Works 홈">
+      <img src="assets/logo.svg" alt="" width="22" height="25" />
+      <span>FineDust<b>Works</b></span>
+    </a>
+    <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="메뉴 열기">
+      <span></span><span></span>
+    </button>
+    <nav class="nav__links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#domains">Domains</a>
+      <a href="#approach">Approach</a>
+      <a href="#lab">Lab</a>
+      <a href="#contact" class="nav__cta">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <canvas class="hero__canvas" id="dust" aria-hidden="true"></canvas>
+      <div class="hero__vignette" aria-hidden="true"></div>
+
+      <div class="hero__inner">
+        <p class="eyebrow"><span class="dot"></span>Independent studio · Est. 2026</p>
+        <h1 class="hero__title">
+          <span class="line">Small particles.</span>
+          <span class="line line--dim">Shaped into things</span>
+          <span class="line line--dim">that work.</span>
+        </h1>
+        <p class="hero__lede">
+          FineDust Works는 로봇과 작은 디바이스, 개발 툴, AI 에이전트,
+          소프트웨어와 게임을 만드는 1인 스튜디오입니다.
+          보이지 않을 만큼 작은 단위에서 출발해, 손에 잡히는 결과물로 응집시킵니다.
+        </p>
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="#domains">무엇을 만드나요</a>
+          <a class="btn btn--ghost" href="#contact">함께 만들기 →</a>
+        </div>
+      </div>
+
+      <div class="hero__meta" aria-hidden="true">
+        <span id="coord">x 0.000 · y 0.000</span>
+        <span>PM 0.1µm — ∞</span>
+      </div>
+      <a class="hero__scroll" href="#about" aria-label="아래로 스크롤">
+        <span>scroll</span><i></i>
+      </a>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section class="section about" id="about">
+      <div class="wrap about__grid">
+        <div class="about__label reveal">
+          <p class="kicker">01 — About</p>
+          <div class="about__mark">
+            <!-- One coordinate system for grid + logo, so the guides pass exactly through
+                 the dot centres. Box = logo width / 0.38, centred on the logo. -->
+            <svg class="guides" viewBox="-51.67 -48.29 144.08 144.08" role="img" aria-label="FineDust Works 로고와 6개의 행, 1개의 기둥 가이드">
+              <defs>
+                <radialGradient id="gFade" cx="0.5" cy="0.5" r="0.5">
+                  <stop offset="0.35" stop-color="#fff" />
+                  <stop offset="1" stop-color="#fff" stop-opacity="0" />
+                </radialGradient>
+                <mask id="gMask" maskUnits="userSpaceOnUse" x="-51.67" y="-48.29" width="144.08" height="144.08">
+                  <rect x="-51.67" y="-48.29" width="144.08" height="144.08" fill="url(#gFade)" />
+                </mask>
+              </defs>
+              <g class="guides__lines" mask="url(#gMask)">
+                <line class="guides__col" x1="0" y1="-48.29" x2="0" y2="95.79" />
+                <line class="guides__row" style="--i:0" x1="-51.67" y1="0" x2="92.41" y2="0" />
+                <line class="guides__row" style="--i:1" x1="-51.67" y1="9.5" x2="92.41" y2="9.5" />
+                <line class="guides__row" style="--i:2" x1="-51.67" y1="19" x2="92.41" y2="19" />
+                <line class="guides__row" style="--i:3" x1="-51.67" y1="28.5" x2="92.41" y2="28.5" />
+                <line class="guides__row" style="--i:4" x1="-51.67" y1="38" x2="92.41" y2="38" />
+                <line class="guides__row" style="--i:5" x1="-51.67" y1="47.5" x2="92.41" y2="47.5" />
+              </g>
+              <g class="guides__labels" aria-hidden="true">
+                <text x="1.8" y="-39">C1</text>
+                <text x="-45" y="1.3">R1</text>
+                <text x="-45" y="10.8">R2</text>
+                <text x="-45" y="20.3">R3</text>
+                <text x="-45" y="29.8">R4</text>
+                <text x="-45" y="39.3">R5</text>
+                <text x="-45" y="48.8">R6</text>
+              </g>
+              <image class="guides__logo" href="assets/logo.svg" x="-7" y="-7" width="54.75" height="61.5" />
+            </svg>
+          </div>
+        </div>
+        <div class="about__body">
+          <h2 class="h2 reveal">미세먼지처럼 작게,<br /><em>그러나 어디에나.</em></h2>
+          <p class="reveal">
+            큰 시스템도 결국 작은 입자들의 집합입니다. 한 줄의 코드, 하나의 센서,
+            하나의 프롬프트, 하나의 픽셀. FineDust Works는 그 작은 단위를 정성껏
+            다루는 것에서 시작합니다.
+          </p>
+          <p class="reveal">
+            하드웨어와 소프트웨어, 도구와 놀이의 경계를 나누지 않습니다.
+            한 사람이 처음부터 끝까지 설계하기 때문에 결과물은 가볍고,
+            일관되고, 빠르게 움직입니다.
+          </p>
+          <dl class="stats reveal">
+            <div><dt>1</dt><dd>Maker</dd></div>
+            <div><dt>6</dt><dd>Domains</dd></div>
+            <div><dt>∞</dt><dd>Particles</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ DOMAINS ============ -->
+    <section class="section domains" id="domains">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker">02 — Domains</p>
+          <h2 class="h2">입자가 모이는 <em>여섯 개의 영역</em></h2>
+        </header>
+
+        <ol class="cards">
+          <li class="card reveal">
+            <span class="card__no">/01</span>
+            <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="12" y="14" width="24" height="18" rx="4"/><circle cx="19" cy="23" r="2.5"/><circle cx="29" cy="23" r="2.5"/><path d="M24 14V8M21 8h6M16 32v6M32 32v6M8 21v6M40 21v6"/></svg>
+            <h3>Robotics</h3>
+            <p>작고 영리한 로봇. 액추에이터, 센서 퓨전, 제어 루프까지 직접 설계합니다.</p>
+            <ul class="tags"><li>ROS 2</li><li>Embedded</li><li>Control</li></ul>
+          </li>
+          <li class="card reveal">
+            <span class="card__no">/02</span>
+            <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="14" y="10" width="20" height="28" rx="3"/><path d="M14 18H8M14 24H8M14 30H8M34 18h6M34 24h6M34 30h6"/><circle cx="24" cy="24" r="4"/></svg>
+            <h3>Tiny Devices</h3>
+            <p>손바닥 위의 하드웨어. MCU 펌웨어, PCB, 인클로저, 저전력 IoT.</p>
+            <ul class="tags"><li>ESP32</li><li>PCB</li><li>Firmware</li></ul>
+          </li>
+          <li class="card reveal">
+            <span class="card__no">/03</span>
+            <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M30 10a8 8 0 0 0-7.6 10.4L10 32.8 15.2 38l12.4-12.4A8 8 0 0 0 38 18l-5 5-5-5 5-5a8 8 0 0 0-3-3z"/></svg>
+            <h3>Tools</h3>
+            <p>반복을 없애는 도구. CLI, 에디터 확장, 워크플로 자동화, 개발자 경험.</p>
+            <ul class="tags"><li>CLI</li><li>Plugins</li><li>DX</li></ul>
+          </li>
+          <li class="card reveal">
+            <span class="card__no">/04</span>
+            <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="5"/><circle cx="10" cy="12" r="3"/><circle cx="38" cy="12" r="3"/><circle cx="10" cy="36" r="3"/><circle cx="38" cy="36" r="3"/><path d="M13 14l7 6M35 14l-7 6M13 34l7-6M35 34l-7-6"/></svg>
+            <h3>AI Agents</h3>
+            <p>스스로 판단하고 도구를 쓰는 에이전트. LLM 오케스트레이션, MCP, 자동화 파이프라인.</p>
+            <ul class="tags"><li>LLM</li><li>MCP</li><li>Agents</li></ul>
+          </li>
+          <li class="card reveal">
+            <span class="card__no">/05</span>
+            <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><rect x="8" y="10" width="32" height="26" rx="3"/><path d="M8 17h32M18 25l-4 3 4 3M30 25l4 3-4 3M26 23l-4 10"/></svg>
+            <h3>Software</h3>
+            <p>웹과 데스크톱, 모바일 앱. 작고 빠르며 오래 쓰기 좋은 제품을 만듭니다.</p>
+            <ul class="tags"><li>Web</li><li>Desktop</li><li>Mobile</li></ul>
+          </li>
+          <li class="card reveal">
+            <span class="card__no">/06</span>
+            <svg class="card__icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M14 16h20a8 8 0 0 1 8 8v4a6 6 0 0 1-10.6 3.8L29 29H19l-2.4 2.8A6 6 0 0 1 6 28v-4a8 8 0 0 1 8-8z"/><path d="M15 21v6M12 24h6"/><circle cx="31" cy="22" r="1.5"/><circle cx="34" cy="26" r="1.5"/></svg>
+            <h3>Games</h3>
+            <p>입자처럼 흩어지고 모이는 경험. 인디 게임, 프로토타입, 인터랙티브 아트.</p>
+            <ul class="tags"><li>Unity</li><li>Godot</li><li>Shaders</li></ul>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ APPROACH ============ -->
+    <section class="section approach" id="approach">
+      <div class="wrap">
+        <header class="section__head reveal">
+          <p class="kicker">03 — Approach</p>
+          <h2 class="h2">흩어진 것에서 <em>형태로</em></h2>
+        </header>
+
+        <div class="steps">
+          <article class="step reveal">
+            <div class="step__viz" data-mode="disperse" aria-hidden="true"></div>
+            <span class="step__no">Disperse</span>
+            <h3>관찰하고 흩어보기</h3>
+            <p>문제를 가장 작은 단위로 분해합니다. 무엇이 진짜 필요한지 찾을 때까지.</p>
+          </article>
+          <article class="step reveal">
+            <div class="step__viz" data-mode="gather" aria-hidden="true"></div>
+            <span class="step__no">Gather</span>
+            <h3>모으고 시험하기</h3>
+            <p>빠른 프로토타입으로 입자를 모읍니다. 납땜이든, 코드든, 스케치든.</p>
+          </article>
+          <article class="step reveal">
+            <div class="step__viz" data-mode="condense" aria-hidden="true"></div>
+            <span class="step__no">Condense</span>
+            <h3>응집하고 다듬기</h3>
+            <p>남길 것만 남기고 단단하게 만듭니다. 군더더기 없는 결과물로.</p>
+          </article>
+          <article class="step reveal">
+            <div class="step__viz" data-mode="release" aria-hidden="true"></div>
+            <span class="step__no">Release</span>
+            <h3>내보내고 퍼뜨리기</h3>
+            <p>세상에 공개하고, 피드백을 다시 작은 입자로 받아들여 반복합니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ LAB ============ -->
+    <section class="section lab" id="lab">
+      <div class="wrap">
+        <header class="section__head section__head--row reveal">
+          <div>
+            <p class="kicker">04 — Lab</p>
+            <h2 class="h2">작업 중인 <em>입자들</em></h2>
+          </div>
+          <p class="section__note">진행 중인 실험과 프로젝트. 곧 더 많은 것들이 공개됩니다.</p>
+        </header>
+
+        <ul class="lab__list">
+          <li class="lab__item reveal">
+            <span class="lab__status lab__status--live">In progress</span>
+            <h3>Project Mote</h3>
+            <p>책상 위를 돌아다니는 손바닥 크기의 자율 로봇</p>
+            <span class="lab__cat">Robotics · Device</span>
+          </li>
+          <li class="lab__item reveal">
+            <span class="lab__status lab__status--live">In progress</span>
+            <h3>Sift</h3>
+            <p>로컬 파일과 작업을 정리해 주는 개인용 AI 에이전트</p>
+            <span class="lab__cat">AI Agent · Tool</span>
+          </li>
+          <li class="lab__item reveal">
+            <span class="lab__status">Prototype</span>
+            <h3>Haze</h3>
+            <p>연기와 빛으로 길을 찾는 분위기 중심의 인디 게임</p>
+            <span class="lab__cat">Game</span>
+          </li>
+          <li class="lab__item reveal">
+            <span class="lab__status">Idea</span>
+            <h3>PM Sensor Kit</h3>
+            <p>실내 미세먼지를 측정하고 시각화하는 오픈 하드웨어 키트</p>
+            <span class="lab__cat">Device · Software</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section class="section contact" id="contact">
+      <div class="wrap contact__inner reveal">
+        <p class="kicker">05 — Contact</p>
+        <h2 class="contact__title">작은 아이디어도<br /><em>충분합니다.</em></h2>
+        <p class="contact__lede">협업, 외주, 혹은 그냥 재미있는 이야기. 언제든 편하게 연락 주세요.</p>
+        <a class="contact__mail" href="mailto:hello@finedustworks.com">hello@finedustworks.com</a>
+        <ul class="socials">
+          <li><a href="#" aria-label="GitHub">GitHub</a></li>
+          <li><a href="#" aria-label="X">X</a></li>
+          <li><a href="#" aria-label="YouTube">YouTube</a></li>
+          <li><a href="#" aria-label="Blog">Blog</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer__inner">
+      <span class="footer__brand"><img src="assets/logo.svg" alt="" width="14" height="16" /> FineDust Works</span>
+      <span>© <span id="year">2026</span> FineDust Works. All particles reserved.</span>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
