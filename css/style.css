@@ -352,6 +352,13 @@ body::after {
 .lab__item.is-hot { background: linear-gradient(90deg, rgba(91,97,105,0.12), transparent); padding-left: 20px; }
 .lab__item h3 { font-family: var(--font-display); font-weight: 400; font-size: clamp(22px, 2.4vw, 30px); letter-spacing: -0.02em; }
 .lab__item p { color: var(--text-dim); font-size: 15px; word-break: keep-all; }
+.lab__item:has(.lab__link) { position: relative; }
+.lab__link { color: inherit; text-decoration: none; }
+.lab__link::after { content: ""; position: absolute; inset: 0; }
+.lab__link:focus-visible { outline: none; }
+.lab__item:has(.lab__link:focus-visible) { outline: 1px solid var(--ash); outline-offset: -1px; }
+.lab__arrow { display: inline-block; margin-left: 10px; font-size: 0.6em; vertical-align: 0.3em; color: var(--text-mute); transition: transform 0.4s var(--ease), color 0.4s; }
+.lab__item:hover .lab__arrow, .lab__link:focus-visible .lab__arrow { color: var(--ash); transform: translate(3px, -3px); }
 .lab__cat { font-family: var(--font-mono); font-size: 11px; color: var(--text-mute); letter-spacing: 0.08em; white-space: nowrap; }
 .lab__status {
   justify-self: start; display: inline-flex; align-items: center; gap: 8px;
