@@ -463,6 +463,67 @@
   links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
 
+  /* ---------------- copy email on click (mailto still opens) ---------------- */
+  const mail = document.querySelector(".contact__mail");
+  if (mail) {
+    const address = mail.getAttribute("href").replace(/^mailto:/, "");
+    const fallbackCopy = (text) => {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.setAttribute("readonly", "");
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand("copy"); } catch (_) {}
+      ta.remove();
+      return ok;
+    };
+    let hideTimer;
+    const showCopied = () => {
+      mail.classList.add("is-copied");
+      clearTimeout(hideTimer);
+      hideTimer = setTimeout(() => mail.classList.remove("is-copied"), 1800);
+    };
+    mail.addEventListener("click", () => {
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(address).then(showCopied, () => { if (fallbackCopy(address)) showCopied(); });
+      } else if (fallbackCopy(address)) {
+        showCopied();
+      }
+    });
+  }
+
+  /* ---------------- nav: mark the section in view ---------------- */
+  const navMap = new Map();
+  links.querySelectorAll('a[href^="#"]').forEach((a) => {
+    const sec = document.getElementById(a.getAttribute("href").slice(1));
+    if (sec) navMap.set(sec, a);
+  });
+  const setCurrent = (a) => navMap.forEach((link) => {
+    if (link === a) link.setAttribute("aria-current", "true");
+    else link.removeAttribute("aria-current");
+  });
+  // a section counts as "current" while it crosses the middle band of the viewport
+  const spy = new IntersectionObserver((entries) => {
+    entries.forEach((e) => { if (e.isIntersecting) setCurrent(navMap.get(e.target)); });
+  }, { rootMargin: "-45% 0px -50% 0px" });
+  navMap.forEach((_, sec) => spy.observe(sec));
+  const hero = document.getElementById("top");
+  if (hero) new IntersectionObserver(([e]) => { if (e.isIntersecting) setCurrent(null); },
+    { rootMargin: "-45% 0px -50% 0px" }).observe(hero);
+
+  /* placeholder links that aren't live yet */
+  document.querySelectorAll('a[aria-disabled="true"]').forEach((a) =>
+    a.addEventListener("click", (e) => e.preventDefault()));
+
+  console.log(
+    "%c· · FineDust Works\n%cSmall particles. Shaped into things that work.\nhello@finedustworks.com",
+    "font: 600 14px/1.6 monospace; color: #e7e7e2",
+    "font: 12px/1.6 monospace; color: #a9a9a2"
+  );
+
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 })();
