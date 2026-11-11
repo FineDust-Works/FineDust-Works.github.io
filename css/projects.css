@@ -292,11 +292,11 @@ code {
 .pgallery__btn:hover img { transform: scale(1.025); }
 .phero__cover .pgallery__btn img { aspect-ratio: auto; }
 
-.plight { padding: 0; border: 0; max-width: 100vw; max-height: 100vh; width: 100vw; height: 100vh; background: rgba(0,0,0,0.92); color: var(--text); }
+.plight { padding: 0; border: 0; max-width: var(--viewport-width); max-height: var(--viewport-height); width: var(--viewport-width); height: var(--viewport-height); background: rgba(0,0,0,0.92); color: var(--text); }
 .plight::backdrop { background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); }
 .plight[open] { display: grid; grid-template-columns: 64px 1fr 64px; align-items: center; animation: panelIn 0.35s var(--ease); }
-.plight figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; max-height: 100vh; padding: 48px 0; }
-.plight img { max-width: 100%; max-height: calc(100vh - 140px); width: auto; height: auto; border-radius: 12px; border: 1px solid var(--line); }
+.plight figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 14px; max-height: var(--viewport-height); padding: 48px 0; }
+.plight img { max-width: 100%; max-height: calc(var(--viewport-height) - 140px); width: auto; height: auto; border-radius: 12px; border: 1px solid var(--line); }
 .plight figcaption { font-family: var(--font-mono); font-size: 12px; color: var(--text-dim); text-align: center; }
 .plight__close, .plight__nav {
   width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line-strong); background: rgba(0,0,0,0.5);

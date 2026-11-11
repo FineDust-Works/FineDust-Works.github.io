@@ -3,6 +3,9 @@
    ash #A9A9A2 · midnight #0A1729 · void #000 · char #24292B · slate #5B6169
    ========================================================= */
 :root {
+  --site-scale: 0.9;
+  --viewport-height: calc(100vh / var(--site-scale));
+  --viewport-width: calc(100vw / var(--site-scale));
   --void: #000000;
   --midnight: #0a1729;
   --char: #24292b;
@@ -30,7 +33,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; color-scheme: dark; scrollbar-color: var(--slate) var(--bg); -webkit-tap-highlight-color: transparent; }
+html { zoom: var(--site-scale); -webkit-text-size-adjust: 100%; color-scheme: dark; scrollbar-color: var(--slate) var(--bg); -webkit-tap-highlight-color: transparent; }
 body {
   margin: 0;
   background: var(--bg);
@@ -167,7 +170,8 @@ body::after {
 /* ---------- hero ---------- */
 .hero {
   position: relative;
-  min-height: 100svh;
+  /* Keep the hero full-screen after applying the default page scale. */
+  min-height: calc(100svh / var(--site-scale));
   display: flex; align-items: center;
   overflow: hidden;
   background:

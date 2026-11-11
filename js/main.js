@@ -104,8 +104,10 @@
       const x = pointer.x - r.left, y = pointer.y - r.top;
       mouse.active = pointer.has && x >= 0 && y >= 0 && x <= r.width && y <= r.height;
       if (mouse.active) {
-        if (mouse.sx < -999) { mouse.sx = x; mouse.sy = y; }
-        mouse.x = x; mouse.y = y;
+        // Pointer coordinates are visual pixels; the canvas uses layout pixels.
+        const cx = x * W / r.width, cy = y * H / r.height;
+        if (mouse.sx < -999) { mouse.sx = cx; mouse.sy = cy; }
+        mouse.x = cx; mouse.y = cy;
       }
     }
     let scatter = 0;  // 0 = fully formed, 1 = fully dispersed (driven by scroll)
@@ -116,7 +118,8 @@
 
     function layout() {
       // where the logo sits in the hero
-      const VH = Math.min(H, window.innerHeight); // hero can be taller than the viewport on mobile
+      const scaleY = canvas.getBoundingClientRect().height / H || 1;
+      const VH = Math.min(H, window.innerHeight / scaleY); // hero can be taller than the viewport on mobile
       const scale = isMobile() ? Math.min(W * 0.5, VH * 0.3) / LOGO_VB.h : Math.min(VH * 0.62, W * 0.36) / LOGO_VB.h;
       const lw = LOGO_VB.w * scale, lh = LOGO_VB.h * scale;
       const cx = isMobile() ? W * 0.5 : W * 0.72;
@@ -416,8 +419,8 @@
       const inside = pointer.has && x >= 0 && y >= 0 && x <= r.width && y <= r.height;
       el.classList.toggle("is-hot", inside);
       if (inside && el.classList.contains("card")) {
-        el.style.setProperty("--mx", `${x}px`);
-        el.style.setProperty("--my", `${y}px`);
+        el.style.setProperty("--mx", `${x * el.offsetWidth / r.width}px`);
+        el.style.setProperty("--my", `${y * el.offsetHeight / r.height}px`);
       }
     }
   });
