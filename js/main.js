@@ -387,11 +387,30 @@
     io.observe(el);
   });
 
+  /* ---------------- lab list, rendered from the project content ----------------
+     Projects are edited in the content repo, so new ones show up here without a redeploy. */
+  const labList = document.getElementById("labList");
+  if (labList && window.FDContent) {
+    const C = window.FDContent;
+    Promise.all([C.site(), C.projects()]).then(([site, list]) => {
+      if (!list.length) return;
+      const catName = (id) => (site.categories.find((c) => c.id === id) || {}).name || "";
+      labList.innerHTML = list.map((p) => `
+        <li class="lab__item reveal">
+          ${C.statusHTML(p.status)}
+          <h3><a class="lab__link" href="${C.projectUrl(p.id)}">${C.esc(p.name)}<span class="lab__arrow" aria-hidden="true">↗</span></a></h3>
+          <p>${C.esc(p.tagline)}</p>
+          <span class="lab__cat">${C.esc([catName(p.category), (p.tags || [])[0]].filter(Boolean).join(" · "))}</span>
+        </li>`).join("");
+      labList.querySelectorAll(".reveal").forEach((el, i) => { el.style.transitionDelay = `${(i % 4) * 70}ms`; io.observe(el); });
+    }).catch(() => { /* keep the static fallback row */ });
+  }
+
   /* ---------------- hover state + card glow, driven by the global pointer ----------------
      Recomputed on pointer move AND scroll, so a still cursor stays accurate. */
-  const hotEls = [...document.querySelectorAll(".card, .lab__item")];
+  // queried each time: Lab rows and project cards are rendered after load
   pointerSubs.push(() => {
-    for (const el of hotEls) {
+    for (const el of document.querySelectorAll(".card, .lab__item")) {
       const r = el.getBoundingClientRect();
       const x = pointer.x - r.left, y = pointer.y - r.top;
       const inside = pointer.has && x >= 0 && y >= 0 && x <= r.width && y <= r.height;

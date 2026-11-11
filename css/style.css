@@ -105,12 +105,21 @@ body::after {
   position: fixed; inset: 0 0 auto 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
   padding: 18px var(--gutter);
-  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s, padding 0.4s;
+  transition: border-color 0.4s, padding 0.4s;
   border-bottom: 1px solid transparent;
 }
-.nav.is-scrolled {
+/* Keep backdrop-filter off the header: it would make the fixed mobile
+   menu use the header's bounds instead of the viewport after scrolling. */
+.nav::before {
+  content: ""; position: absolute; inset: 0; z-index: -1;
+  pointer-events: none;
+  transition: background 0.4s, backdrop-filter 0.4s;
+}
+.nav.is-scrolled::before {
   background: rgba(0, 0, 0, 0.55);
   backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.nav.is-scrolled {
   border-bottom-color: var(--line);
   padding-top: 12px; padding-bottom: 12px;
 }
@@ -367,6 +376,8 @@ body::after {
 .lab__status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; border: 1px solid var(--slate); }
 .lab__status--live { color: var(--ash); }
 .lab__status--live::before { background: var(--ash); border-color: var(--ash); box-shadow: 0 0 10px var(--ash); animation: pulse 2.4s infinite; }
+
+.lab__more { display: flex; justify-content: flex-end; margin-top: 40px; }
 
 /* contact */
 .contact { text-align: center; overflow: hidden; }
