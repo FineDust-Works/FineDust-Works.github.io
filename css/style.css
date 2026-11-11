@@ -370,7 +370,7 @@ body::after {
 .contact__mail:hover { border-color: var(--smoke); color: var(--white); }
 .contact__mail { position: relative; }
 .contact__mail::after {
-  content: "복사됨 ✓"; position: absolute; left: 50%; top: calc(100% + 12px);
+  content: "복사됨"; position: absolute; left: 50%; top: calc(100% + 12px);
   transform: translate(-50%, -4px); padding: 5px 12px; border-radius: 999px;
   border: 1px solid var(--line-strong); background: var(--char);
   font-family: var(--font-mono); font-size: 12px; color: var(--smoke); white-space: nowrap;
