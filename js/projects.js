@@ -397,8 +397,9 @@
             ${p.fullName ? `<p class="phero__full">${esc(p.fullName)}</p>` : ""}
             <p class="phero__tagline">${esc(p.tagline)}</p>
             <div class="prose phero__summary">${md(p.summary)}</div>
-            ${(primary.length || rest.length) ? `<div class="hero__actions phero__actions">
+            ${(primary.length || rest.length || p.github) ? `<div class="hero__actions phero__actions">
               ${primary.map((l) => `<a class="btn btn--solid" href="${esc(l.url)}" target="_blank" rel="noopener"><span class="btn__face">${esc(l.label)}<span class="btn__arrow" aria-hidden="true">↗</span></span></a>`).join("")}
+              ${p.github ? `<a class="btn btn--ghost" href="${esc(p.github)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(p.name)} GitHub 저장소 (새 탭)"><span class="btn__face">GitHub<span class="btn__arrow" aria-hidden="true">↗</span></span></a>` : ""}
               ${rest.slice(0, 2).map((l) => `<a class="btn btn--ghost" href="${esc(l.url)}" target="_blank" rel="noopener"><span class="btn__face">${esc(l.label)}</span></a>`).join("")}
             </div>` : ""}
           </div>
