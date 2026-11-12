@@ -386,6 +386,7 @@
     const rest = (p.links || []).filter((l) => !l.primary);
     const idx = all.findIndex((x) => x.id === id);
     const prev = all[idx - 1], next = all[idx + 1];
+    const tabLinks = (suffix = "") => tabs.map((t, i) => `<a class="ptab" role="tab" id="tab-${t.key}${suffix}" href="${C.projectUrl(id, t.key)}" data-tab="${t.key}" aria-controls="panel-${t.key}"><span>${pad(i + 1)}</span>${esc(t.title)}</a>`).join("");
 
     root.innerHTML = `
       <section class="phero">
@@ -407,10 +408,13 @@
         </div>
       </section>
       <nav class="ptabs" aria-label="프로젝트 섹션"><div class="wrap"><div class="ptabs__inner" role="tablist">
-        ${tabs.map((t, i) => `<a class="ptab" role="tab" id="tab-${t.key}" href="${C.projectUrl(id, t.key)}" data-tab="${t.key}" aria-controls="panel-${t.key}"><span>${pad(i + 1)}</span>${esc(t.title)}</a>`).join("")}
+        ${tabLinks()}
       </div></div></nav>
       <div class="ppanels wrap">
         ${tabs.map((t) => `<section class="ppanel" role="tabpanel" id="panel-${t.key}" aria-labelledby="tab-${t.key}" hidden></section>`).join("")}
+        <nav class="ptabs ptabs--bottom" aria-label="프로젝트 섹션 하단"><div class="ptabs__inner" role="tablist" aria-label="프로젝트 섹션 하단">
+          ${tabLinks("-bottom")}
+        </div></nav>
       </div>
       <nav class="pnext wrap" aria-label="다른 프로젝트">
         ${prev ? `<a href="${C.projectUrl(prev.id)}"><span class="kicker">← Previous</span><strong>${esc(prev.name)}</strong></a>` : "<span></span>"}
@@ -453,18 +457,22 @@
         if (window.scrollY > top) window.scrollTo({ top, behavior: "instant" });
       }
     }
-    root.querySelector(".ptabs__inner").addEventListener("click", (e) => {
-      const a = e.target.closest(".ptab");
-      if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
-      e.preventDefault();
-      show(a.dataset.tab, true);
-    });
-    root.querySelector(".ptabs__inner").addEventListener("keydown", (e) => {
-      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
-      const i = tabs.findIndex((t) => t.key === current) + (e.key === "ArrowRight" ? 1 : -1);
-      const t = tabs[(i + tabs.length) % tabs.length];
-      show(t.key, true);
-      root.querySelector(`#tab-${t.key}`).focus();
+    root.querySelectorAll(".ptabs__inner").forEach((strip) => {
+      strip.addEventListener("click", (e) => {
+        const a = e.target.closest(".ptab");
+        if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
+        e.preventDefault();
+        show(a.dataset.tab, true);
+        if (strip.closest(".ptabs--bottom")) root.querySelector(`#tab-${a.dataset.tab}`).focus({ preventScroll: true });
+      });
+      strip.addEventListener("keydown", (e) => {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        e.preventDefault();
+        const i = tabs.findIndex((t) => t.key === current) + (e.key === "ArrowRight" ? 1 : -1);
+        const t = tabs[(i + tabs.length) % tabs.length];
+        show(t.key, true);
+        root.querySelector(`#tab-${t.key}`).focus({ preventScroll: true });
+      });
     });
     window.addEventListener("popstate", () => {
       const k = new URLSearchParams(location.search).get("tab");

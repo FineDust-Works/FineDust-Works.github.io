@@ -133,6 +133,7 @@ code {
   transition: background 0.3s;
 }
 .ptabs.is-stuck { background: rgba(0,0,0,0.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+.ptabs--bottom { position: static; margin-top: clamp(56px, 7vw, 88px); }
 .ptabs__inner { position: relative; display: flex; gap: clamp(20px, 3vw, 40px); overflow-x: auto; scrollbar-width: none; }
 .ptabs__inner::-webkit-scrollbar { display: none; }
 .ptab {
