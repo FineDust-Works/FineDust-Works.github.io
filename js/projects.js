@@ -94,7 +94,7 @@
           <header class="section__head section__head--row reveal">
             <div>
               <p class="kicker">Projects</p>
-              <h1 class="h2">모든 입자를 <em>여섯 개의 영역</em>으로</h1>
+              <h1 class="h2"><em>여섯 가지 분야</em>의 프로젝트</h1>
             </div>
             <p class="section__note">FineDust Works에서 만들고 있는 프로젝트입니다. 각 프로젝트의 기능, 기술 구조, 개발 과정, 업데이트 기록을 볼 수 있습니다.</p>
           </header>
