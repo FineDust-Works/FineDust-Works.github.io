@@ -484,6 +484,8 @@
   toggle.addEventListener("click", () => setMenu(toggle.getAttribute("aria-expanded") !== "true"));
   links.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
   window.addEventListener("keydown", (e) => { if (e.key === "Escape") setMenu(false); });
+  // Release the mobile scroll lock when rotating or resizing to desktop.
+  window.matchMedia("(max-width: 760px)").addEventListener("change", () => setMenu(false));
 
   /* ---------------- copy email on click (mailto still opens) ---------------- */
   const mail = document.querySelector(".contact__mail");

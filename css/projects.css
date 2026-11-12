@@ -121,9 +121,8 @@ code {
   animation: condense 1.2s 0.12s var(--ease) both; }
 .phero__summary { margin-top: 18px; max-width: 520px; animation: condense 1.2s 0.22s var(--ease) both; }
 .phero__actions { margin-top: 34px; opacity: 1; animation: condense 1.2s 0.32s var(--ease) both; }
-.phero__cover { margin: 0; animation: condense 1.4s 0.2s var(--ease) both; }
-.phero__cover .pgallery__btn { border: 0; border-radius: 18px; background: transparent; }
-.phero__cover img { width: 100%; height: auto; border-radius: 18px; }
+.phero__cover { width: 100%; min-width: 0; margin: 0; justify-self: center; animation: condense 1.4s 0.2s var(--ease) both; }
+.phero__cover .pgallery__btn { display: grid; place-items: center; border: 0; border-radius: 18px; background: transparent; }
 
 /* ---------- tabs ---------- */
 .ptabs {
@@ -299,7 +298,13 @@ code {
 .pgallery__btn:hover { border-color: var(--line-strong); }
 .pgallery__btn img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top left; transition: transform 0.9s var(--ease); }
 .pgallery__btn:hover img { transform: scale(1.025); }
-.phero__cover .pgallery__btn img { aspect-ratio: auto; }
+/* Contain portrait artwork as well as wide screenshots without enlarging
+   the hero to the image's natural aspect ratio. Keep gallery sizing separate. */
+.phero__cover .pgallery__btn img {
+  width: auto; height: auto; max-width: 100%; max-height: min(400px, 50svh);
+  aspect-ratio: auto; object-fit: contain; object-position: center; border-radius: 14px;
+}
+.phero__cover .pgallery__btn:hover img { transform: none; }
 
 .plight { padding: 0; border: 0; max-width: var(--viewport-width); max-height: var(--viewport-height); width: var(--viewport-width); height: var(--viewport-height); background: rgba(0,0,0,0.92); color: var(--text); }
 .plight::backdrop { background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); }
@@ -339,6 +344,7 @@ code {
 @media (max-width: 1023px) {
   .phero__grid { grid-template-columns: 1fr; }
   .phero__cover { max-width: 760px; }
+  .phero__cover .pgallery__btn img { max-height: min(320px, 42svh); }
   .pgroup__head { grid-template-columns: 52px 1fr auto; }
   .pgroup__summary { grid-column: 2 / -1; grid-row: 2; }
   .pcards { margin-left: 72px; }
@@ -353,7 +359,37 @@ code {
   .pfacts div:nth-child(n+3) { border-top: 1px solid var(--line); }
 }
 @media (max-width: 760px) {
-  .ptabs { top: 57px; }
+  .phero__cover .pgallery__btn img { max-height: min(240px, 36svh); }
+  .ptabs { top: 69px; }
+  .plist { padding-top: 124px; }
+  .chips { margin-top: 0; gap: 8px; }
+  .chip { min-height: 44px; padding: 9px 14px; }
+  .phero { padding-top: 112px; }
+  .phero__title { font-size: clamp(38px, 10vw, 64px); overflow-wrap: anywhere; }
+  .pcrumb { flex-wrap: wrap; letter-spacing: 0.04em; overflow-wrap: anywhere; }
+  .phero__meta { margin-top: 24px; }
+  .pcard__body { padding: 20px; }
+  .pcard__meta { flex-wrap: wrap; gap: 6px 12px; }
+  .pcard__name { font-size: 26px; overflow-wrap: anywhere; }
+  .ptabs__inner { gap: 24px; scroll-padding-inline: 8px; }
+  .ptab { padding: 16px 0; font-size: 14px; }
+  .ptab span { display: none; }
+  .ppanels { padding-top: 36px; padding-bottom: 64px; }
+  .psec { margin-top: 48px; }
+  .pbox { padding: 22px; }
+  .pfacts dd { font-size: 24px; overflow-wrap: anywhere; }
+  .pfacts div { min-width: 0; padding-right: 12px; }
+  .psection-nav { gap: 10px; margin-top: 40px; }
+  .psection-nav__link { gap: 10px; padding: 16px 12px; }
+  .psection-nav__text strong { font-size: 16px; }
+  .pplay__bar { gap: 10px; padding: 10px 12px; }
+  .pplay__bar a { min-height: 44px; display: inline-flex; align-items: center; }
+  .pplay__url { min-width: 0; }
+  .pplay__dots { display: none; }
+  .pnext > *, .plight figure { min-width: 0; }
+  .pnext strong { overflow-wrap: anywhere; }
+  .plight { height: 100dvh; max-height: 100dvh; }
+  .plight img { max-height: calc(100dvh - 190px); }
   .pgroup__head { grid-template-columns: 1fr auto; gap: 6px 16px; }
   .pgroup__head .card__no { grid-column: 1 / -1; }
   .pgroup__name { grid-row: 2; }
