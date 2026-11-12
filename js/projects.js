@@ -412,9 +412,7 @@
       </div></div></nav>
       <div class="ppanels wrap">
         ${tabs.map((t) => `<section class="ppanel" role="tabpanel" id="panel-${t.key}" aria-labelledby="tab-${t.key}" hidden></section>`).join("")}
-        <nav class="ptabs ptabs--bottom" aria-label="프로젝트 섹션 하단"><div class="ptabs__inner" role="tablist" aria-label="프로젝트 섹션 하단">
-          ${tabLinks("-bottom")}
-        </div></nav>
+        <nav class="psection-nav" aria-label="프로젝트 섹션 이동"></nav>
       </div>
       <nav class="pnext wrap" aria-label="다른 프로젝트">
         ${prev ? `<a href="${C.projectUrl(prev.id)}"><span class="kicker">← Previous</span><strong>${esc(prev.name)}</strong></a>` : "<span></span>"}
@@ -424,6 +422,7 @@
 
     const rendered = new Set();
     const tabsEl = root.querySelector(".ptabs");
+    const sectionNav = root.querySelector(".psection-nav");
     function show(key, push) {
       current = key;
       const t = tabs.find((x) => x.key === key);
@@ -437,6 +436,12 @@
         reveal(panel);
       }
       root.querySelectorAll(".ppanel").forEach((x) => { x.hidden = x !== panel; });
+      const index = tabs.indexOf(t);
+      sectionNav.innerHTML = [tabs[index - 1], tabs[index + 1]].map((adjacent, direction) => adjacent ?
+        `<a class="psection-nav__link${direction ? " psection-nav__link--next" : ""}" href="${C.projectUrl(id, adjacent.key)}" data-tab="${adjacent.key}">
+          <span class="psection-nav__arrow" aria-hidden="true">${direction ? "→" : "←"}</span>
+          <span class="psection-nav__text"><span class="psection-nav__label">${direction ? "다음 섹션" : "이전 섹션"}</span><strong>${esc(adjacent.title)}</strong></span>
+        </a>` : "").join("");
       root.querySelectorAll(".ptab").forEach((a) => {
         const on = a.dataset.tab === key;
         a.setAttribute("aria-selected", String(on));
@@ -463,7 +468,6 @@
         if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return;
         e.preventDefault();
         show(a.dataset.tab, true);
-        if (strip.closest(".ptabs--bottom")) root.querySelector(`#tab-${a.dataset.tab}`).focus({ preventScroll: true });
       });
       strip.addEventListener("keydown", (e) => {
         if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
@@ -473,6 +477,14 @@
         show(t.key, true);
         root.querySelector(`#tab-${t.key}`).focus({ preventScroll: true });
       });
+    });
+    sectionNav.addEventListener("click", (e) => {
+      const a = e.target.closest("a[data-tab]");
+      if (!a || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
+      e.preventDefault();
+      const key = a.dataset.tab;
+      show(key, true);
+      root.querySelector(`#tab-${key}`).focus({ preventScroll: true });
     });
     window.addEventListener("popstate", () => {
       const k = new URLSearchParams(location.search).get("tab");
